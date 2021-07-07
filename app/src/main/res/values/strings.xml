@@ -19,5 +19,9 @@
     <string name="shotr_description_note">Краткое описание</string>
     <string name="save_added_note">Сохранить заметку</string>
 
+    <string name="alert_dialog">Окно подтверждения удаления</string>
+    <string name="exclamation">Запись будет удалена. Продолжить?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 
 </resources>

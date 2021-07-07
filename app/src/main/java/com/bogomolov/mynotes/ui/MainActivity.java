@@ -1,6 +1,8 @@
 package com.bogomolov.mynotes.ui;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -154,7 +156,36 @@ public class MainActivity extends AppCompatActivity implements
                 imageWidget.setImageResource(R.drawable.hourglass_icon);
             }
             if (item.getItemId() == R.id.delete) {
-                Toast.makeText(MainActivity.this, String.format(" Удалить %s", note.getName()), Toast.LENGTH_SHORT).show();
+
+               AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                // В билдере указываем заголовок окна. Можно указывать как ресурс, так
+                // и строку
+                builder.setTitle(R.string.exclamation)
+                        // Указываем сообщение в окне. Также есть вариант со строковым
+                        // параметром
+                        // Из этого окна нельзя выйти кнопкой Back
+                        .setCancelable(false)
+                        // Устанавливаем отрицательную кнопку
+                        .setNegativeButton(R.string.no,
+                                // Ставим слушатель, будем обрабатывать нажатие
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Toast.makeText(MainActivity.this, "Нет", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                        // Устанавливаем кнопку. Название кнопки также можно задавать
+                        // строкой
+                        .setPositiveButton(R.string.yes,
+                                // Ставим слушатель, будем обрабатывать нажатие
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Toast.makeText(MainActivity.this, "Да", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
+        Toast.makeText(MainActivity.this, String.format(" Удалить %s", note.getName()), Toast.LENGTH_SHORT).show();
                 noteList.removeView(itemView);
             }
             return true;
